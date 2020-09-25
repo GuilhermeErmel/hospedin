@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <ul>
+      <% docs.forEach(function(user){ %>
+        <li>
+            <%= user.name %>
+        </li>
+      <% }) %>
+    </ul>
+    <hr />
+    <a href="/new_user">Cadastrar novo usuário</a>
+  </body>
+</html>
