@@ -6,3 +6,18 @@ body {
 a {
   color: #00B7FF;
 }
+
+textarea {
+  height: 100px;
+  width: 300px;
+  vertical-align: text-top;
+}
+
+.right {
+  float: right;
+}
+
+.actionBtn a {
+  text-decoration: none;
+  color: inherit;
+}

@@ -1,23 +1,79 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
+
   <body>
     <h1><%= title %></h1>
+
+    <h4>Novas:<span class="right"><%= newIssues.length %></span></h4>
     <ul>
-      <% docs.forEach(function(issue){ %>
-        <li>
-          <a href="/issues/<%= issue._id %>">
-            <%= issue.title %>
-          </a>
-        </li>
+      <% newIssues.forEach(function(issue){ %>
+      <li>
+        <a href="/issues/<%= issue._id %>">
+          <%= issue.title %>
+        </a>
+      </li>
       <% }) %>
     </ul>
     <hr />
-    <a href="/issue">Nova tarefa</a>
+
+    <h4>Em progresso:<span class="right"><%= inProgressIssues.length %></span></h4>
+    <ul>
+      <% inProgressIssues.forEach(function(issue){ %>
+      <li>
+        <a href="/issues/<%= issue._id %>">
+          <%= issue.title %>
+        </a>
+      </li>
+      <% }) %>
+    </ul>
     <hr />
-    <a href="/user">Cadastrar novo usuário</a>
+
+    <h4>Paradas:<span class="right"><%= stoppedIssues.length %></span></h4>
+    <ul>
+      <% stoppedIssues.forEach(function(issue){ %>
+      <li>
+        <a href="/issues/<%= issue._id %>">
+          <%= issue.title %>
+        </a>
+      </li>
+      <% }) %>
+    </ul>
+    <hr />
+
+    <h4>Encerradas:<span class="right"><%= doneIssues.length %></span></h4>
+    <ul>
+      <% doneIssues.forEach(function(issue){ %>
+      <li>
+        <a href="/issues/<%= issue._id %>">
+          <%= issue.title %>
+        </a>
+      </li>
+      <% }) %>
+    </ul>
+    <hr />
+
+    <h4>Canceladas:<span class="right"><%= canceledIssues.length %></span></h4>
+    <ul>
+      <% canceledIssues.forEach(function(issue){ %>
+      <li>
+        <a href="/issues/<%= issue._id %>">
+          <%= issue.title %>
+        </a>
+      </li>
+      <% }) %>
+    </ul>
+    <hr />
+
+    <footer>
+      <button class="actionBtn"><a href="/issue">Nova tarefa</a></button>
+      <button class="actionBtn right"><a href="/users">Gerenciar usuários</a></button>
+    </footer>
+
   </body>
+
 </html>

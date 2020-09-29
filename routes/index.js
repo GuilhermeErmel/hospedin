@@ -8,7 +8,14 @@ router.get('/', function (req, res) {
       return console.log(err);
     }
 
-    res.render('index', { title: 'Lista de Tarefas', docs: docs });
+    // separa em seções
+    var newIssues = _.filter(docs, { status: 'new' });
+    var inProgressIssues = _.filter(docs, { status: 'inProgress' });
+    var stoppedIssues = _.filter(docs, { status: 'stopped' });
+    var doneIssues = _.filter(docs, { status: 'done' });
+    var canceledIssues = _.filter(docs, { status: 'cancel' });
+
+    res.render('index', { title: 'Lista de Tarefas', newIssues, inProgressIssues, stoppedIssues, doneIssues, canceledIssues });
   })
 });
 

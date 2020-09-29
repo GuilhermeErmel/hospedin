@@ -17,6 +17,7 @@
                 <option value="inProgress" <%= doc.status == 'inProgress' ? 'selected' : ''%>>Em andamento</option>
                 <option value="stopped" <%= doc.status == 'stopped' ? 'selected' : ''%>>Parado</option>
                 <option value="done" <%= doc.status == 'done' ? 'selected' : ''%>>Feito</option>
+                <option value="cancel" <%= doc.status == 'cancel' ? 'selected' : ''%>>Feito</option>
             </select>
         </p>
 
@@ -27,7 +28,7 @@
 
         <p>
             Descrição:
-            <input type="text" name="description" value="<%= doc.description %>" />
+            <textarea type="text" name="description"><%= doc.description %></textarea>
         </p>
 
         <p>

@@ -4,9 +4,9 @@ var router = express.Router();
 // novo
 router.post('/', function (req, res) {
   var name = req.body.name;
-  var years = parseInt(req.body.years);
+  var role = req.body.role;
 
-  global.db.users.insert({ name, years }, (err, result) => {
+  global.db.users.insert({ name, role }, (err, result) => {
     if (err) {
       return console.log(err);
     }
@@ -41,8 +41,8 @@ router.get('/:id', function (req, res, next) {
 router.post('/:id', function (req, res) {
   var id = req.params.id;
   var name = req.body.name;
-  var years = parseInt(req.body.years);
-  global.db.users.update(id, { name, years }, (err, result) => {
+  var role = req.body.role;
+  global.db.users.update(id, { name, role }, (err, result) => {
     if (err) {
       return console.log(err);
     }

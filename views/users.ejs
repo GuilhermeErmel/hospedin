@@ -1,21 +1,29 @@
 <!DOCTYPE html>
 <html>
+
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
+
   <body>
     <h1><%= title %></h1>
     <ul>
       <% docs.forEach(function(user){ %>
-        <li>
-          <a href="/users/<%= user._id %>">
-            <%= user.name %>
-          </a>
-        </li>
+      <li>
+        <a href="/users/<%= user._id %>">
+          <%= user.name %>
+        </a>
+      </li>
       <% }) %>
     </ul>
     <hr />
-    <a href="/user">Cadastrar novo usuário</a>
+
+    <footer>
+      <button class="actionBtn"><a href="/user">Cadastrar novo usuário</a></button>
+      <button class="actionBtn right"><a href="/">Voltar para Tarefas</a></button>
+    </footer>
+
   </body>
+
 </html>
