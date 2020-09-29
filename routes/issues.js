@@ -6,7 +6,7 @@ router.post('/', function (req, res) {
     var status = req.body.status;
     var title = req.body.title;
     var description = req.body.description;
-    var responsibleUserId = req.body.responsibleUserId;
+    var responsible_userId = req.body.responsible_userId;
     var forecastDate = req.body.forecastDate;
     var priority = req.body.priority;
 
@@ -14,7 +14,7 @@ router.post('/', function (req, res) {
         status,
         title,
         description,
-        responsibleUserId,
+        responsible_userId,
         forecastDate,
         priority
     }, (err, result) => {
@@ -41,68 +41,60 @@ router.get('/', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
     var id = req.params.id;
 
-        Promise.all([
-            // obtem issue
-            new Promise(function (resolve, reject) {
-                global.db.issues.findOne(id, (err, docs) => {
-                    if (err) {
-                        reject(err);
-                    }
-                    resolve(docs);
-                })
-            }),
-            // otem usuários
-            new Promise(function (resolve, reject) {
-                global.db.users.findAll((err, docs) => {
-                    if (err) {
-                        reject(err);
-                    }
-                    resolve(docs);
-                })
+    Promise.all([
+        // obtem issue
+        new Promise(function (resolve, reject) {
+            global.db.issues.findOne(id, (err, docs) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(docs);
             })
-        ]).then(function (results) {
-            var doc =  _.get(results[0], "0");
-            var users = results[1];
+        }),
+        // otem usuários
+        new Promise(function (resolve, reject) {
+            global.db.users.findAll((err, docs) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(docs);
+            })
+        })
+    ]).then(function (results) {
+        var doc = _.get(results[0], "0");
+        var users = results[1];
 
-            res.render('issue', { title: 'Detalhes da tarefa', doc: doc, users: users, action: '/issue/' + _.get(doc, "_id") });
+        res.render('issue', { title: 'Detalhes da tarefa', doc: doc, users: users, action: '/issue/' + _.get(doc, "_id") });
 
-        }).catch((err) => {
+    }).catch((err) => {
+        return console.log(err);
+    });
+});
+
+// edita
+router.post('/:id', function (req, res) {
+    var id = req.params.id;
+    var status = req.body.status;
+    var title = req.body.title;
+    var description = req.body.description;
+    var responsible_userId = req.body.responsible_userId;
+    var forecastDate = req.body.forecastDate;
+    var priority = req.body.priority;
+
+    global.db.issues.update(id, {
+        status,
+        title,
+        description,
+        responsible_userId,
+        forecastDate,
+        priority
+    }, (err, result) => {
+
+        if (err) {
             return console.log(err);
-        });
-        /*
-          global.db.issues.findOne(id, (err, docs) => {
-            if(err) {
-              return console.log(err);
-            }
-            res.render('issue', { title: 'Detalhes da tarefa', doc: docs[0], action: '/issue/' + docs[0]._id });
-          });
-          */
+        }
+        res.redirect('/');
     });
+});
 
-    // edita
-    router.post('/:id', function (req, res) {
-        var id = req.params.id;
-        var status = req.body.status;
-        var title = req.body.title;
-        var description = req.body.description;
-        var responsibleUserId = req.body.responsibleUserId;
-        var forecastDate = req.body.forecastDate;
-        var priority = req.body.priority;
-
-        global.db.issues.update(id, {
-            status,
-            title,
-            description,
-            responsibleUserId,
-            forecastDate,
-            priority
-        }, (err, result) => {
-
-            if (err) {
-                return console.log(err);
-            }
-            res.redirect('/');
-        });
-    });
-
-    module.exports = router;
+module.exports = router;

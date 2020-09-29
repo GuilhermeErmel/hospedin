@@ -15,7 +15,7 @@ router.post('/', function (req, res) {
 });
 
 // lista todos
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
   global.db.users.findAll((err, docs) => {
     if (err) {
       return console.log(err);
@@ -26,11 +26,11 @@ router.get('/', function(req, res, next) {
 });
 
 // abre edição
-router.get('/:id', function(req, res, next) {
+router.get('/:id', function (req, res, next) {
   var id = req.params.id;
 
   global.db.users.findOne(id, (err, docs) => {
-    if(err) {
+    if (err) {
       return console.log(err);
     }
     res.render('user', { title: 'Editar usuário', doc: docs[0], action: '/user/' + docs[0]._id });
@@ -38,16 +38,16 @@ router.get('/:id', function(req, res, next) {
 });
 
 // edita
-router.post('/:id', function(req, res) {
+router.post('/:id', function (req, res) {
   var id = req.params.id;
   var name = req.body.name;
   var years = parseInt(req.body.years);
-  global.db.users.update(id, {name, years}, (err, result) => {
-        if(err) {
-          return console.log(err);
-        }
-        res.redirect('/users');
-    });
+  global.db.users.update(id, { name, years }, (err, result) => {
+    if (err) {
+      return console.log(err);
+    }
+    res.redirect('/users');
+  });
 });
 
 module.exports = router;

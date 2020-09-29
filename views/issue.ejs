@@ -32,11 +32,10 @@
 
         <p>
             Responsável:
-            <span><%= doc.responsibleUserId %></span>
-            <select type="text" name="responsibleUserId" value="<%= doc.responsibleUserId %>">
+            <select type="text" name="responsible_userId" value="<%= doc.responsible_userId %>">
                 <option></option>
                 <% users.forEach(function(user){ %>
-                    <option value="<%= user._id %>" <%= doc.responsibleUserId == user._id ? 'selected' : ''%>>
+                    <option value="<%= user._id %>" <%= _.toString(doc.responsible_userId) == _.toString(user._id) ? 'selected' : ''%>>
                         <%= user.name %>
                     </option>
                 <% }) %>

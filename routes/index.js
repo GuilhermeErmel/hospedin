@@ -12,17 +12,20 @@ router.get('/', function (req, res) {
   })
 });
 
-// issue
-router.get('/issue', function(req, res, next) {
-  res.render('issue', { title: 'Nova tarefa', doc: {}, action: '/issue' });
+// Nova tarefa
+router.get('/issue', function (req, res, next) {
+  global.db.users.findAll((err, users) => {
+    if (err) {
+      return console.log(err);
+    }
+
+    res.render('issue', { title: 'Nova tarefa', doc: {}, users: users, action: '/issue' });
+  });
 });
 
-
-// user
-router.get('/user', function(req, res, next) {
+// Novo usuário
+router.get('/user', function (req, res, next) {
   res.render('user', { title: 'Novo Cadastro', doc: {}, action: '/user' });
 });
-
-
 
 module.exports = router;
