@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1><%= title %></h1>
+    <form action="<%= action %>" method="POST">
+
+        <p>
+            Status:
+            <select type="text" name="status" value="<%= doc.status %>">
+                <option value="new" <%= doc.status == 'new' ? 'selected' : ''%>>Novo</option>
+                <option value="inProgress" <%= doc.status == 'inProgress' ? 'selected' : ''%>>Em andamento</option>
+                <option value="stopped" <%= doc.status == 'stopped' ? 'selected' : ''%>>Parado</option>
+                <option value="done" <%= doc.status == 'done' ? 'selected' : ''%>>Feito</option>
+            </select>
+        </p>
+
+        <p>
+            Título:
+            <input type="text" name="title" value="<%= doc.title %>" />
+        </p>
+
+        <p>
+            Descrição:
+            <input type="text" name="description" value="<%= doc.description %>" />
+        </p>
+
+        <p>
+            Responsável:
+            <span><%= doc.responsibleUserId %></span>
+            <select type="text" name="responsibleUserId" value="<%= doc.responsibleUserId %>">
+                <option></option>
+                <% users.forEach(function(user){ %>
+                    <option value="<%= user._id %>" <%= doc.responsibleUserId == user._id ? 'selected' : ''%>>
+                        <%= user.name %>
+                    </option>
+                <% }) %>
+            </select>
+        </p>
+
+        <p>
+            Data de previsão:
+            <input type="date" name="forecastDate" value="<%= doc.forecastDate %>" />
+        </p>
+
+        <p>
+            Prioridade:
+            <select type="text" name="priority" value="<%= doc.priority %>">
+                <option value="high" <%= doc.priority == 'high' ? 'selected' : ''%>>Alta</option>
+                <option value="normal" <%= doc.priority == 'normal' ? 'selected' : ''%>>Média</option>
+                <option value="low" <%= doc.priority == 'low' ? 'selected' : ''%>>Baixa</option>
+            </select>
+        </p>
+
+        <input type="submit" value="Salvar" />
+    </form>
+</body>
+
+</html>

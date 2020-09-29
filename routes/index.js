@@ -3,29 +3,26 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function (req, res) {
-  global.db.findAll((err, docs) => {
+  global.db.issues.findAll((err, docs) => {
     if (err) {
       return console.log(err);
     }
 
-    res.render('index', { title: 'Lista de Usuários', docs: docs });
+    res.render('index', { title: 'Lista de Tarefas', docs: docs });
   })
 });
 
-router.get('/new_user', function (req, res, next) {
-  res.render('new_user', { title: 'Cadastrar usuário' });
+// issue
+router.get('/issue', function(req, res, next) {
+  res.render('issue', { title: 'Nova tarefa', doc: {}, action: '/issue' });
 });
 
-router.post('/new_user', function (req, res) {
-  var name = req.body.name;
-  var years = parseInt(req.body.years);
 
-  global.db.insert({ name, years }, (err, result) => {
-    if (err) {
-      return console.log(err);
-    }
-    res.redirect('/');
-  })
+// user
+router.get('/user', function(req, res, next) {
+  res.render('user', { title: 'Novo Cadastro', doc: {}, action: '/user' });
 });
+
+
 
 module.exports = router;
